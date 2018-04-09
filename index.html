@@ -9,7 +9,7 @@
         <body>
             Seeking Linux/Infrastructure/DevOps/SecOps/Cloud/Site Reliability/ new role
             <HR>
-            Some docker fun just in case emacs is not handy - C-z to kill evil
+            Some docker fun just in case emacs is not handy - C-z to kill evil - ELK
             <pre>
 
               curl -fsSL get.docker.com -o docker.sh
@@ -18,6 +18,9 @@
               docker pull humitos/emacs-x11-alpine
               docker run --rm -it -e DISPLAY -v $(pwd):/src -v /tmp/.X11-unix:/tmp/.X11-unix:ro   -v $XAUTHORITY:/root/.Xauthority  humitos/emacs-x11-alpine
 
+              docker run -d -p 9200:9200 -p 9300:9300 -it -h elasticsearch --name elasticsearch elasticsearch
+              docker run -d -p 5601:5601 -h kibana --name kibana --link elasticsearch:elasticsearch kibana
+              docker run -h logstash --name logstash --link elasticsearch:elasticsearch -it --rm -v /tmp:/tmp logstash -f /tmp/logstash.conf
             </pre>
 
             <HR>
